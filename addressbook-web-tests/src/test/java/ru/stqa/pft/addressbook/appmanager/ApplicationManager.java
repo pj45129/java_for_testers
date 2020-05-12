@@ -1,30 +1,28 @@
-package ru.stqa.pft.addressbook;
+package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.fail;
 
-public class TestBase {
+public class ApplicationManager {
     public WebDriver driver;
     public String baseUrl;
     public boolean acceptNextAlert = true;
     public StringBuffer verificationErrors = new StringBuffer();
 
-    @BeforeClass(alwaysRun = true)
-    public void setUp() throws Exception {
-      driver = new FirefoxDriver();
-      baseUrl = "https://www.google.com/";
-      driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-      driver.get("http://localhost/addressbook/group.php");
-      login("admin", "secret");
+    public void init() {
+        driver = new FirefoxDriver();
+        baseUrl = "https://www.google.com/";
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.get("http://localhost/addressbook/group.php");
+        login("admin", "secret");
     }
 
-    private void login(String username, String password) {
+    public void login(String username, String password) {
       driver.findElement(By.name("user")).clear();
       driver.findElement(By.name("user")).sendKeys(username);
       driver.findElement(By.name("pass")).click();
@@ -33,15 +31,15 @@ public class TestBase {
       driver.findElement(By.xpath("//input[@value='Login']")).click();
     }
 
-    protected void returnToGroupPage() {
+    public void returnToGroupPage() {
       driver.findElement(By.linkText("group page")).click();
     }
 
-    protected void submitGroupeCreation() {
+    public void submitGroupeCreation() {
       driver.findElement(By.name("submit")).click();
     }
 
-    protected void fillGroupForm(GroupData groupData) {
+    public void fillGroupForm(GroupData groupData) {
       driver.findElement(By.name("group_name")).click();
       driver.findElement(By.name("group_name")).clear();
       driver.findElement(By.name("group_name")).sendKeys(groupData.getName());
@@ -53,24 +51,23 @@ public class TestBase {
       driver.findElement(By.name("group_footer")).sendKeys(groupData.getFooter());
     }
 
-    protected void unitGroupCreation() {
+    public void unitGroupCreation() {
       driver.findElement(By.name("new")).click();
     }
 
-    protected void gotoGroupPage() {
+    public void gotoGroupPage() {
       driver.findElement(By.linkText("groups")).click();
     }
 
-    @AfterClass(alwaysRun = true)
-    public void tearDown() throws Exception {
-      driver.quit();
-      String verificationErrorString = verificationErrors.toString();
-      if (!"".equals(verificationErrorString)) {
-        fail(verificationErrorString);
-      }
+    public void stop() {
+        driver.quit();
+        String verificationErrorString = verificationErrors.toString();
+        if (!"".equals(verificationErrorString)) {
+          fail(verificationErrorString);
+        }
     }
 
-    private boolean isElementPresent(By by) {
+    public boolean isElementPresent(By by) {
       try {
         driver.findElement(by);
         return true;
@@ -79,7 +76,7 @@ public class TestBase {
       }
     }
 
-    private boolean isAlertPresent() {
+    public boolean isAlertPresent() {
       try {
         driver.switchTo().alert();
         return true;
@@ -88,7 +85,7 @@ public class TestBase {
       }
     }
 
-    private String closeAlertAndGetItsText() {
+    public String closeAlertAndGetItsText() {
       try {
         Alert alert = driver.switchTo().alert();
         String alertText = alert.getText();
@@ -103,11 +100,11 @@ public class TestBase {
       }
     }
 
-    protected void deleteSelectedGroups() {
+    public void deleteSelectedGroups() {
       driver.findElement(By.name("delete")).click();
     }
 
-    protected void selectedGroup() {
+    public void selectedGroup() {
       driver.findElement(By.name("selected[]")).click();
     }
 }
