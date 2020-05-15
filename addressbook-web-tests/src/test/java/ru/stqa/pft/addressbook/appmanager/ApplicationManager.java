@@ -8,6 +8,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.concurrent.TimeUnit;
 
+import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
 public class ApplicationManager {
@@ -19,7 +20,7 @@ public class ApplicationManager {
     private NavigationHelper navigationHelper;
     private GroupHelper groupHelper;
     public String baseUrl;
-    public boolean acceptNextAlert = true;
+    //public boolean acceptNextAlert = true;
     public StringBuffer verificationErrors = new StringBuffer();
 
     public void init() {
@@ -43,29 +44,7 @@ public class ApplicationManager {
         }
     }
 
-    public boolean isElementPresent(By by) {
-      try {
-        driver.findElement(by);
-        return true;
-      } catch (NoSuchElementException e) {
-        return false;
-      }
-    }
 
-    public String closeAlertAndGetItsText() {
-      try {
-        Alert alert = driver.switchTo().alert();
-        String alertText = alert.getText();
-        if (acceptNextAlert) {
-          alert.accept();
-        } else {
-          alert.dismiss();
-        }
-        return alertText;
-      } finally {
-        acceptNextAlert = true;
-      }
-    }
 
     public GroupHelper getGroupHelper() {
         return groupHelper;
@@ -75,10 +54,8 @@ public class ApplicationManager {
         return navigationHelper;
     }
 
-    //--------------------------------------------------------------------------------------
-
-
     public ContactHelper getContactHelper() {
         return contactHelper;
     }
+
 }

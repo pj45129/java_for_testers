@@ -6,6 +6,8 @@ import org.testng.annotations.BeforeClass;
 import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
 import ru.stqa.pft.addressbook.model.ContactData;
 
+import static org.testng.Assert.assertTrue;
+
 public class TestBase {
 
     protected final ApplicationManager app = new ApplicationManager();
@@ -19,4 +21,5 @@ public class TestBase {
     public void tearDown() throws Exception {
         app.stop();
     }
+
 }
