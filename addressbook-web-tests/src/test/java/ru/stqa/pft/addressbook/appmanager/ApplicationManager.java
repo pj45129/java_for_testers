@@ -13,7 +13,7 @@ import static org.testng.Assert.fail;
 public class ApplicationManager {
 
     public WebDriver driver;
-    public String baseUrl;
+    //public String baseUrl;
     public StringBuffer verificationErrors = new StringBuffer();
 
 
@@ -28,7 +28,7 @@ public class ApplicationManager {
     }
 
     public void init() {
-        if (browser.equals(BrowserType.FIREFOX)) {
+         if (browser.equals(BrowserType.FIREFOX)) {
             driver = new FirefoxDriver();
         } else if (browser.equals(BrowserType.CHROME)) {
             driver = new ChromeDriver();
@@ -36,8 +36,8 @@ public class ApplicationManager {
             driver = new InternetExplorerDriver();
         }
 
-        baseUrl = "https://www.google.com/";
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        //baseUrl = "https://www.google.com/";
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         driver.get("http://localhost/addressbook/group.php");
         contactHelper = new ContactHelper(driver);
         groupHelper = new GroupHelper(driver);

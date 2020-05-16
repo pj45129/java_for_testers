@@ -14,13 +14,18 @@ public class ContactModificationTest extends TestBase{
 
         // переход на главную страницу
         app.getNavigationHelper().gotoContactHomePage();
-        // выбор контакта
-        app.getContactHelper().selectedContact();
+
+        // выбор контакта (можно обойтись без проставления галочки)
+        //app.getContactHelper().selectedContact();
+
+
         // нажимаем на кнопку редактирования
         app.getContactHelper().initContactModification();
         // вносим данные
-        app.getContactHelper().fillContactForm(new ContactData("Sidor", "Sidorov", "89001112233", "sidor@mail.ru"));
+        app.getContactHelper().fillContactForm(new ContactData("Sidor", "Sidorov", "89001112233", "sidor@mail.ru", null), false);
         // нажимаем добавить изменения
         app.getContactHelper().subContactModification();
+        //вернуться на гавную страницу
+        app.getContactHelper().returnToHomePage();
     }
 }
