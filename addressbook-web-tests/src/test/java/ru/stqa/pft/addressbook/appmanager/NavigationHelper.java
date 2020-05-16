@@ -24,14 +24,4 @@ public class NavigationHelper extends HelperBase {
         }
         click(By.linkText("home"));
     }
-
-
-//    //-----------------------------------------------------------------
-//    //Ниже код для перехода во вкладку добавления контакта.
-//    //Он же дублирует метод public void initContactCreation() { click(By.linkText("add new"));} в классе ContactHelper
-//    public void gotoContactAddNew() {
-//        click(By.linkText("add new"));
-//    }
-//    //-----------------------------------------------------------------
-
 }

@@ -54,18 +54,22 @@ public class  ContactHelper extends HelperBase {
     public void subContactModification() {
         click(By.name("update"));
     }
+
+    public void createContact(ContactData contact, boolean b) {
+        // прям с домашней страницы нажимаю на кнопку для добавления контакта
+        initContactCreation();
+        //заполнить форму какими-то данными
+        fillContactForm(contact, true);
+        //подтвердить создание конткта
+        submitContactCreation();
+        //вернуться на гавную страницу
+        returnToHomePage();
+    }
+
+    public boolean isTherAContact() {
+        return isElementPresent(By.name("selected[]"));
+    }
     //------------------------------------------------------------------
 
-    // Этот кусок кода мой
-    //public void submitContactCreation() {
-    //    click(By.xpath("(//input[@name='submit'])[2]"));
-    //}
-    //    public void initContactModification() {
-//        click(By.xpath("//img[@alt='Edit']"));
-//    }
-
-//    public void subContactModification() {
-//        click(By.xpath("(//input[@name='update'])[2]"));
-//    }
 
 }

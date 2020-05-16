@@ -14,6 +14,10 @@ public class ContactModificationTest extends TestBase{
 
         // переход на главную страницу
         app.getNavigationHelper().gotoContactHomePage();
+        // проверка на наличее контакта и создание его в случаи отсутсвия
+        if (! app.getContactHelper().isTherAContact()) {
+            app.getContactHelper().createContact(new ContactData("Ivan", "Ivanov", "89001112233", "ivan@mail.ru", "test1"), true);
+        }
 
         // выбор контакта (можно обойтись без проставления галочки)
         //app.getContactHelper().selectedContact();
