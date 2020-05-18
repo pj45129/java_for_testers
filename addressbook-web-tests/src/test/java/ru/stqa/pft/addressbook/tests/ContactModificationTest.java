@@ -8,10 +8,6 @@ public class ContactModificationTest extends TestBase{
     @Test
     public void testContactModification() {
 
-        //
-        // ПОЧЕМУ-ТО САЙТ НЕ ВНОСИТ ИЗМЕНЕНИЯ А УДАЛЯЕТ КОНТАКТ
-        //
-
         // переход на главную страницу
         app.getNavigationHelper().gotoContactHomePage();
         // проверка на наличее контакта и создание его в случаи отсутсвия
