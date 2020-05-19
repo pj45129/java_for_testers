@@ -73,15 +73,12 @@ public class  ContactHelper extends HelperBase {
         returnToHomePage();
     }
 
+    // проверка на наличее Контактов
     public boolean isThereAContact() {
         return isElementPresent(By.name("selected[]"));
     }
-    //------------------------------------------------------------------
-    public int getContactCount() {
-        return driver.findElements(By.name("selected[]")).size();
-    }
 
-
+    // создаем список элементов ContactData
     public List<ContactData> getContactList() {
         List<ContactData> contacts = new ArrayList<ContactData>();
         // выбрал By.name("entry") потому что By.cssSelector("tr") не подходит (захватывает лишние элементы)

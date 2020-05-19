@@ -18,11 +18,6 @@ public class HelperBase {
     protected void type(By locator, String text) {
         click(locator);
 
-
-//        driver.findElement(locator).clear();
-//        driver.findElement(locator).sendKeys(text);
-
-
         // проверяем текст, который хотим ввести. Если тот же то пропускаем, если новый то заменяем.
         // Если заменяемый текст со значением null, то пропускаем эту строчку.
         if (text != null) {
