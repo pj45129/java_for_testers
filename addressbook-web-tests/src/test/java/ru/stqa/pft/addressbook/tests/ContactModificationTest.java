@@ -4,6 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
+import java.util.List;
+
 public class ContactModificationTest extends TestBase{
 
     @Test
@@ -11,16 +13,13 @@ public class ContactModificationTest extends TestBase{
         // переход на главную страницу
         app.getNavigationHelper().gotoContactHomePage();
         // проверка на наличее контакта и создание его в случаи отсутсвия
-        if (! app.getContactHelper().isTherAContact()) {
+        if (! app.getContactHelper().isThereAContact()) {
             app.getContactHelper().createContact(new ContactData("Ivan", "Ivanov", "89001112233", "ivan@mail.ru", "test1"), true);
         }
-
-        int before = app.getContactHelper().getContactCount();
-
-
-
+        // строчка ниже содержит список элементов ContactData
+        List<ContactData> before = app.getContactHelper().getContactList();
         // при выбор контакта (можно обойтись без проставления галочки)
-        app.getContactHelper().selectedContact(before - 1);
+        app.getContactHelper().selectedContact(before.size() - 1);
         // нажимаем на кнопку редактирования
         app.getContactHelper().initContactModification();
         // вносим данные
@@ -29,10 +28,14 @@ public class ContactModificationTest extends TestBase{
         app.getContactHelper().subContactModification();
         //вернуться на гавную страницу
         app.getContactHelper().returnToHomePage();
-        int after = app.getContactHelper().getContactCount();
-        // Тест выдает ошибку, потому что сайт вместо изменений - удаляет контакт.
-        // поэтому не сходиться колличество контактов.
-        // ЧТОБЫ сейчас тест отрабатывал без ошибки, я добавил -1 к before
-        Assert.assertEquals(after, before - 1);
+
+        // подсчитываем колличество контактов после создания нового элемента -
+        List<ContactData> after = app.getContactHelper().getContactList();
+        /** - и сравниваем размер списка с ДО с ПОСЛЕ создания элемента
+         * Тест выдает ошибку, потому что сайт вместо изменений - удаляет контакт.
+         * поэтому не сходиться колличество контактов.
+         * ЧТОБЫ сейчас тест отрабатывал без ошибки, я добавил -1 к before
+         */
+        Assert.assertEquals(after.size(), before.size() - 1);
     }
 }
