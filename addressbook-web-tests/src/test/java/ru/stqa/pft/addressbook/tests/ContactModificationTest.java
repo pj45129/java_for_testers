@@ -4,6 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 
 public class ContactModificationTest extends TestBase{
@@ -22,8 +24,10 @@ public class ContactModificationTest extends TestBase{
         app.getContactHelper().selectedContact(before.size() - 1);
         // нажимаем на кнопку редактирования
         app.getContactHelper().initContactModification();
+        // создаем локальную переменную с данными, которые будем вносить при модификации.
+        ContactData contact = new ContactData(before.get(before.size() - 1).getId(), "Sidor", "Sidorov", "89001112233", "sidor@mail.ru", null);
         // вносим данные
-        app.getContactHelper().fillContactForm(new ContactData("Sidor", "Sidorov", "89001112233", "sidor@mail.ru", null), false);
+        app.getContactHelper().fillContactForm(contact, false);
         // нажимаем добавить изменения
         app.getContactHelper().subContactModification();
         //вернуться на гавную страницу
@@ -37,5 +41,19 @@ public class ContactModificationTest extends TestBase{
          * ЧТОБЫ сейчас тест отрабатывал без ошибки, я добавил -1 к before
          */
         Assert.assertEquals(after.size(), before.size() - 1);
+
+
+
+        // !!! Урок 4 видео 44 Множества Неупорядоченные коллекции
+        // !!! Код ниже не работает т.к. САЙТ не модифицирует элемент а тупа удаляет.
+        // удаляем предпоследний элемент из списка
+        before.remove(before.size() - 1);
+        // создаем список с элементов, который появится после модификации.
+        before.add(contact);
+        Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
+        before.sort(byId);
+        after.sort(byId);
+        // Сравниваем элементы.
+        Assert.assertEquals(before, after);
     }
 }
