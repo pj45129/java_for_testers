@@ -13,7 +13,6 @@ import static org.testng.Assert.fail;
 public class ApplicationManager {
 
     public WebDriver driver;
-    //public String baseUrl;
     public StringBuffer verificationErrors = new StringBuffer();
 
 

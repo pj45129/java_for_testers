@@ -32,13 +32,15 @@ public class  ContactHelper extends HelperBase {
     }
 
     public void deleteSelectedContact() {
+        acceptNextAlert = true;
         click(By.xpath("//input[@value='Delete']"));
         assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
     }
 
-    public void selectedContact() {
-        click(By.name("selected[]"));
-        acceptNextAlert = true;
+    public void selectedContact(int index) {
+        driver.findElements(By.name("selected[]")).get(index).click();
+        //click(By.name("selected[]"));
+        //acceptNextAlert = true;
     }
 
         // Этот кусок кода взятый из видео. Он заменяет код который закоментирован ниже.
@@ -70,6 +72,10 @@ public class  ContactHelper extends HelperBase {
         return isElementPresent(By.name("selected[]"));
     }
     //------------------------------------------------------------------
+    public int getContactCount() {
+        return driver.findElements(By.name("selected[]")).size();
+    }
+
 
 
 }
