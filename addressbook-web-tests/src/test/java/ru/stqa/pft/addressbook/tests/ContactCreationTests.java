@@ -11,7 +11,7 @@ import java.util.List;
 public class ContactCreationTests extends TestBase{
 
 
-  @Test
+  @Test (enabled = false)
   public void testContactCreation() throws Exception {
     // переход на главную страницу
     app.getNavigationHelper().gotoContactHomePage();
