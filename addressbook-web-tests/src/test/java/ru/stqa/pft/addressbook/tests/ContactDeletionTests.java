@@ -13,7 +13,7 @@ public class ContactDeletionTests extends TestBase {
     @Test (enabled = false)
     public void testContactDeletion() throws Exception {
         // переход на главную страницу
-        app.getNavigationHelper().gotoContactHomePage();
+        app.goTo().gotoContactHomePage();
         // проверка на наличее контакта и создание его в случаи отсутсвия
         if (!app.getContactHelper().isThereAContact()) {
             app.getContactHelper().createContact(new ContactData("Ivan", "Ivanov", "89001112233", "ivan@mail.ru", "test1"), true);
@@ -28,7 +28,7 @@ public class ContactDeletionTests extends TestBase {
          *!!!Не удивляйся что на видео название этой команды другое
          * * Потому что, я нажимаю на абсолютно другую кнопку
          */
-        app.getNavigationHelper().gotoContactHomePage();
+        app.goTo().gotoContactHomePage();
         // подсчитываем колличество контактов после создания нового элемента -
         List<ContactData> after = app.getContactHelper().getContactList();
         // - и сравниваем размер списка с ДО с ПОСЛЕ создания элемента
